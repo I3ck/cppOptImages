@@ -3,10 +3,10 @@ set terminal pngcairo size 250,250 enhanced font 'Verdana,10'
 unset key
 set border 0
 unset tics
-set xrange [-5:5]
+set xrange [xMin:xMax]
 
-do for [ii=1:200] {
+do for [ii=1:values] {
 	set output sprintf('animation/%03.0f.png',ii)
-    plot x*x, 'example_1.log' every ::1::ii w lines
+    plot x*x, inputFile every ::1::ii w lines
 }
 

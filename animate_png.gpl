@@ -6,7 +6,7 @@ unset tics
 set xrange [xMin:xMax]
 
 do for [ii=1:values] {
-	set output sprintf('animation/%03.0f.png',ii)
+	set output sprintf('tmp/%03.0f.png',ii)
     plot x*x, inputFile every ::1::ii w lines
 }
 

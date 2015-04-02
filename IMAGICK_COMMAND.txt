@@ -1,1 +1,0 @@
-convert -delay 1 *.png -loop 0 animation.gif

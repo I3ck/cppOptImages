@@ -22,13 +22,24 @@ do for[ii=1:36] {
 do for [ii=1:300] {
 	if(ii % 10 == 0) {
 		#set output sprintf('tmp/%03.0f.png',ii)
-	    splot 20 * ((x*x - 10 * cos(2*pi*x)) + (y*y - 10 * cos(2*pi*y))), inputFile every ::1::ii using 0:1:2
+	    splot 20 * ((x*x - 10 * cos(2*pi*x)) + (y*y - 10 * cos(2*pi*y))), inputFile every ::1::ii*10
 	}
 }
 
 do for [ii=1:300] {
 	if(ii % 10 == 0) {
-		set output sprintf('tmp/%03.0f.png',ii+values)
-	    splot 20 * ((x*x - 10 * cos(2*pi*x)) + (y*y - 10 * cos(2*pi*y))), inputFile every ::1 pt 7, inputFile every ::1::ii w lines
+		#set output sprintf('tmp/%03.0f.png',ii+3000)
+	    splot 20 * ((x*x - 10 * cos(2*pi*x)) + (y*y - 10 * cos(2*pi*y))), inputFile every ::1 , inputFile every ::1::ii*10 w lines
 	}
+}
+
+do for[ii=1:36] {
+	set view 90-ii*2,90
+	splot 20 * ((x*x - 10 * cos(2*pi*x)) + (y*y - 10 * cos(2*pi*y))), inputFile every ::1 , inputFile every ::1 w lines
+}
+
+do for[ii=1:36] {
+	set view 18,90 +ii*2
+	splot 20 * ((x*x - 10 * cos(2*pi*x)) + (y*y - 10 * cos(2*pi*y)))
+	splot 20 * ((x*x - 10 * cos(2*pi*x)) + (y*y - 10 * cos(2*pi*y))), inputFile every ::1 , inputFile every ::1 w lines
 }

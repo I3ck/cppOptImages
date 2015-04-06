@@ -7,6 +7,10 @@ set xrange [xMin:xMax]
 
 do for [ii=1:values] {
 	set output sprintf('tmp/%03.0f.png',ii)
-    plot x*x, inputFile every ::1::ii w lines
+    plot x*x, inputFile every ::1::ii pt 7
 }
 
+do for [ii=1:values] {
+	set output sprintf('tmp/%03.0f.png',ii+values)
+    plot x*x, inputFile every ::1 pt 7, inputFile every ::1::ii w lines
+}

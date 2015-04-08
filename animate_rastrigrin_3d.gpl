@@ -3,8 +3,10 @@ set terminal pngcairo size 350,350 enhanced font 'Verdana,10'
 unset key
 set border 0
 unset tics
+set samples 1000
 set xrange [-5.12:5.12]
 set yrange [-5.12:5.12]
+set zrange [-5.0:70.0]
 rate = 10
 
 inputFile='sourceFiles/rastrigrin/minimize_sa.log'
@@ -12,35 +14,35 @@ inputFile='sourceFiles/rastrigrin/minimize_sa.log'
 do for[ii=1:36] {
 	set view 18,162 -ii*2
 	set output sprintf('tmp/%03.0f.png',ii)
-	splot 20 + ((x*x - 10 * cos(2*pi*x)) + (y*y - 10 * cos(2*pi*y)))
+	splot 20.0 + ((x*x - 10.0 * cos(2.0*pi*x)) + (y*y - 10.0 * cos(2.0*pi*y)))
 }
 
 do for[ii=1:36] {
 	set view 18+ii*2,90
 	set output sprintf('tmp/%03.0f.png',ii+36)
-	splot 20 + ((x*x - 10 * cos(2*pi*x)) + (y*y - 10 * cos(2*pi*y)))
+	splot 20.0 + ((x*x - 10.0 * cos(2.0*pi*x)) + (y*y - 10.0 * cos(2.0*pi*y)))
 }
 
 do for [ii=1:300] {
 	if(ii % 10 == 0) {
 		set output sprintf('tmp/%03.0f.png',ii+72)
-		inputFile every ::1::ii*3, splot 20 + ((x*x - 10 * cos(2*pi*x)) + (y*y - 10 * cos(2*pi*y)))
+		splot 20.0 + ((x*x - 10.0 * cos(2.0*pi*x)) + (y*y - 10.0 * cos(2.0*pi*y))), inputFile every ::1::ii
 	}
 }
 
 do for [ii=1:30] {
 	set output sprintf('tmp/%03.0f.png',ii+372)
-    splot 20 + ((x*x - 10 * cos(2*pi*x)) + (y*y - 10 * cos(2*pi*y))), inputFile every ::1 , inputFile every ::1::ii*3 w lines
+    splot 20.0 + ((x*x - 10.0 * cos(2.0*pi*x)) + (y*y - 10.0 * cos(2.0*pi*y))), inputFile every ::1 , inputFile every ::1::ii*3 w lines
 }
 
 do for[ii=1:36] {
 	set view 90+ii*2,90
 	set output sprintf('tmp/%03.0f.png',ii+402)
-	splot 20 + ((x*x - 10 * cos(2*pi*x)) + (y*y - 10 * cos(2*pi*y))), inputFile every ::1 , inputFile every ::1 w lines
+	splot 20.0 + ((x*x - 10.0 * cos(2.0*pi*x)) + (y*y - 10.0 * cos(2.0*pi*y))), inputFile every ::1 , inputFile every ::1 w lines
 }
 
 do for[ii=1:36] {
 	set view 162,90 +ii*2
 	set output sprintf('tmp/%03.0f.png',ii+438)
-	splot 20 + ((x*x - 10 * cos(2*pi*x)) + (y*y - 10 * cos(2*pi*y))), inputFile every ::1 , inputFile every ::1 w lines
+	splot 20.0 + ((x*x - 10 * cos(2.0*pi*x)) + (y*y - 10.0 * cos(2.0*pi*y))), inputFile every ::1 , inputFile every ::1 w lines
 }

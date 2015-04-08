@@ -1,0 +1,17 @@
+set terminal pngcairo size 350,350 enhanced font 'Verdana,10'
+
+unset key
+set border 0
+unset tics
+set samples 1000
+set xrange [xMin:xMax]
+
+do for [ii=1:values] {
+	set output sprintf('tmp/%03.0f.png',ii)
+    plot 10.0 + (x*x - 10.0 * cos(2.0 * pi * x)), inputFile every ::1::ii pt 7
+}
+
+do for [ii=1:values] {
+	set output sprintf('tmp/%03.0f.png',ii+values)
+	plot 10.0 + (x*x - 10.0 * cos(2.0 * pi * x)), inputFile every ::1 pt 7, inputFile every ::1::ii w lines
+}
